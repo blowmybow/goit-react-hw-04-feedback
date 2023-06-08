@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Item } from './Statistics.styled';
-import { Notification } from '../Notification/Notification';
 
 export const Statistics = ({
   good,
@@ -10,7 +9,7 @@ export const Statistics = ({
   total = 0,
   positivePercentage = 0,
 }) => {
-  return total ? (
+  return (
     <List>
       <Item>Good: {good}</Item>
       <Item>Neutral: {neutral}</Item>
@@ -18,8 +17,6 @@ export const Statistics = ({
       <Item>Total: {total}</Item>
       <Item>Positive Feedback: {positivePercentage}%</Item>
     </List>
-  ) : (
-    <Notification message="There is no feedback" />
   );
 };
 

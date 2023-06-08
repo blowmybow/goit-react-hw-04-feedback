@@ -3,6 +3,7 @@ import { Container } from './App.styled';
 import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
+import { Notification } from './Notification/Notification';
 
 export default function FeedBackApp() {
   const [good, setGood] = useState(0);
@@ -29,6 +30,9 @@ export default function FeedBackApp() {
 
   const countPositiveFeedbackPercentage = () =>
     Math.round((good * 100) / countTotalFeedback());
+
+  const totalFeedback = countTotalFeedback();
+  const positiveFeedback = countPositiveFeedbackPercentage();
   return (
     <Container>
       <Section title="Please leave feedback">
@@ -38,13 +42,17 @@ export default function FeedBackApp() {
         />
       </Section>
       <Section title="Statistics">
-        <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={countTotalFeedback()}
-          positivePercentage={countPositiveFeedbackPercentage()}
-        />
+        {totalFeedback !== 0 ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positivePercentage={positiveFeedback}
+          />
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
       </Section>
     </Container>
   );
